@@ -1,0 +1,29 @@
+{
+  "name": "vite-jest",
+  "version": "0.0.1",
+  "description": "A Jest transformer that enables first-class Vite integration",
+  "type": "module",
+  "exports": {
+    "import": "./index.js"
+  },
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sodatea/vite-jest.git",
+    "directory": "packages/vite-jest"
+  },
+  "author": "Haoqun Jiang <haoqunjiang+npm@gmail.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "jest": "^27.0.0-next.6",
+    "vite": "^2.1.3"
+  },
+  "devDependencies": {
+    "vite": "^2.1.3"
+  }
+}
