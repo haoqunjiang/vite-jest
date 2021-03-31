@@ -41,6 +41,7 @@ importers:
     devDependencies:
       '@vitejs/plugin-vue': 1.2.0_@vue+compiler-sfc@3.0.9
       '@vue/compiler-sfc': 3.0.9_vue@3.0.9
+      '@vue/test-utils': 2.0.0-rc.4_vue@3.0.9
       jest: 27.0.0-next.6
       jest-environment-jsdom: 27.0.0-next.6
       vite: 2.1.4
@@ -48,6 +49,7 @@ importers:
     specifiers:
       '@vitejs/plugin-vue': ^1.1.5
       '@vue/compiler-sfc': ^3.0.5
+      '@vue/test-utils': ^2.0.0-rc.4
       jest: ^27.0.0-next.6
       jest-environment-jsdom: ^27.0.0-next.6
       vite: ^2.1.3
