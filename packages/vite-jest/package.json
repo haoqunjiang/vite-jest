@@ -4,7 +4,8 @@
   "description": "A Jest transformer that enables first-class Vite integration",
   "type": "module",
   "exports": {
-    "import": "./index.js"
+    "./": "./index.js",
+    "./reporter": "./reporter.cjs"
   },
   "files": [
     "index.js"

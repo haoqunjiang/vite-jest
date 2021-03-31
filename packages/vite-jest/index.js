@@ -1,32 +1,20 @@
-import { createServer } from "vite";
-import fs from 'fs'
-
-let viteServer
-
-async function getViteServer() {
-  if (!viteServer) {
-    viteServer = await createServer({
-      base: process.cwd() + '/',
-      server: {
-        middlewareMode: true,
-      },
-      hmr: false
-    })
-  }
-
-  return viteServer
-}
+// import fs from 'fs'
+import viteServer from './vite-server.js'
 
 async function processAsync(src, filepath) {
-  const viteServer = await getViteServer()
   const result = await viteServer.transformRequest(filepath)
 
   if (!result) {
     throw new Error(`Failed to load module ${filepath}`)
   }
+  // temporary fix to resolve @fs urls, which is likely to encounter in monorepos
+  const code = result.code.replace(
+    /import ['"].*\/@fs\/(.*)['"]/g,
+    `import '/$1'`
+  )
 
   return {
-    code: result.code,
+    code,
     map: result.map
   }
 }
