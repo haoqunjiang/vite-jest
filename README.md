@@ -1,8 +1,11 @@
 # vite-jest
 
-A Jest transformer that enables first-class Vite integration
+A Jest transformer that enables first-class Vite integration.
 
-Currently not runnable due to 2 blocker issues:
+Currently only the [`vue-app-type-module`](./examples/vue-app-type-module/) example works, and requires several hacks.
 
-1. Can't resolve the module via Vite server because Jest requires the resolver to be synchronous.
-2. ~~Can't close the Vite server after all the transformations are done, as there's no API to tell a transformer to do so.~~ Fixed by providing a custom reporter.
+The major blocking issue is that Jest doesn't support asynchronous resolver yet.
+Therefore, module paths can't be resolved via the Vite server, making a few Vite-specific paths (injected by Vite core plugins) unresolvable.
+To work around this issue in the example app, we used `moduleNameMapper` to fix injected paths like `/@vite/client` and `/@vite/env`, and a simple regular expression replacement in the transformer implementation to support `@fs` URLs.
+
+To correctly shutdown the Vite server after all tests are done, a custom reporter (`'vite-jest/reporter.cjs'`) is also required in the Jest config.
