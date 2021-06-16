@@ -9,7 +9,7 @@ async function processAsync(src, filepath) {
   }
   // temporary fix to resolve @fs urls, which is likely to encounter in monorepos
   const code = result.code.replace(
-    /import ['"].*\/@fs\/(.*)['"]/g,
+    /import .*['"].*\/@fs\/(.*)['"]/g,
     `import '/$1'`
   )
 
