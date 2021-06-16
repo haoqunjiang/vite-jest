@@ -11,6 +11,9 @@ const jestPath = require.resolve('jest/bin/jest')
 // FIXME: use rootDir instead of process.cwd()
 const viteCacheDirectory = path.join(process.cwd(), './node_modules/.vite/')
 const viteClientDirectory = path.join(process.cwd(), './node_modules/vite/dist/client')
+if (!fs.existsSync(viteCacheDirectory)) {
+  fs.mkdirSync(viteCacheDirectory)
+}
 fs.writeFileSync(path.join(viteCacheDirectory, 'package.json'), JSON.stringify({ type: "module" }))
 fs.writeFileSync(path.join(viteClientDirectory, 'package.json'), JSON.stringify({ type: "module" }))
 
