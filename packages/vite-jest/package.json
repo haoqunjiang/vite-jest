@@ -28,6 +28,8 @@
     "vite": "^2.3.7"
   },
   "dependencies": {
-    "execa": "^5.1.1"
+    "es-module-lexer": "^0.6.0",
+    "execa": "^5.1.1",
+    "magic-string": "^0.25.7"
   }
 }
