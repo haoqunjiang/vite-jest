@@ -4,9 +4,6 @@ export default {
   moduleFileExtensions: ['js', 'jsx', 'json', 'vue', 'mjs'],
   extensionsToTreatAsEsm: ['.jsx', '.vue'],
 
-  // Temporary workaround until jest supports async resolver <https://github.com/facebook/jest/issues/9505>
-  // Then we can use vite to resolve such URLs
-
   transform: {
     "^.+\\.(m)?(js|jsx|json|vue)$": resolveRelative('./index.js'),
   },
