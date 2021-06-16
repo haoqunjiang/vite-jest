@@ -19,4 +19,8 @@ async function processAsync(src, filepath) {
   }
 }
 
-export default { processAsync }
+
+export default {
+  processAsync,
+  process: src => src
+}

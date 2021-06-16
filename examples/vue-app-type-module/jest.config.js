@@ -5,10 +5,7 @@ export default {
     "^.+\\.(m)?(js|jsx|json|vue)$": 'vite-jest',
   },
   transformIgnorePatterns: [
-    '/node_modules/\\.vite/',
-    '/node_modules/(\\.pnpm/.*/node_modules/)(?!vite/)'
-    // uncomment the next line if not using pnpm
-    // '/node_modules/(?!vite/)',
+    '!/node_modules/\\.vite/',
   ],
   testMatch: [
     '**/tests/unit/**/*.spec.?(m)js?(x)',
