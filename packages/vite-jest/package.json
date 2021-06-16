@@ -5,6 +5,7 @@
   "type": "module",
   "exports": {
     "./": "./index.js",
+    "./jest-preset": "./jest-preset.cjs",
     "./reporter": "./reporter.cjs"
   },
   "bin": "bin/vite-jest.js",

@@ -4,11 +4,11 @@ import fs from 'fs'
 import path from 'path'
 import execa from 'execa'
 import { createRequire } from 'module'
-const require = createRequire(import.meta.url)
 
+const require = createRequire(import.meta.url)
 const jestPath = require.resolve('jest/bin/jest')
 
-// FIXME: use rootDir instead of process.cwd()
+// FIXME: use detected rootDir instead of process.cwd()
 const viteCacheDirectory = path.join(process.cwd(), './node_modules/.vite/')
 const viteClientDirectory = path.join(process.cwd(), './node_modules/vite/dist/client')
 if (!fs.existsSync(viteCacheDirectory)) {
@@ -20,9 +20,7 @@ fs.writeFileSync(path.join(viteClientDirectory, 'package.json'), JSON.stringify(
 execa.sync('node', [
   '--experimental-vm-modules',
   jestPath,
-  '--runInBand',
-  '--no-cache'
-  // process.argv.slice(2)
+  process.argv.slice(2)
 ], {
   stdio: 'inherit'
 })
