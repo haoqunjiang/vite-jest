@@ -52,12 +52,12 @@ async function processAsync(src, filepath) {
     } else if (url) {
       if (url.startsWith(FS_PREFIX)) {
         mStr.overwrite(start, end, fsPathFromId(url))
-      } else if (url.startsWith('/')) {
-        mStr.overwrite(start, end, path.join(rootDir, url))
       } else if (url === '/@vite/env') {
         mStr.overwrite(start, end, require.resolve('vite/dist/client/env.js'))
       } else if (url === '/@vite/client') {
         mStr.overwrite(start, end, require.resolve('vite/dist/client/client.js'))
+      } else if (url.startsWith('/')) {
+        mStr.overwrite(start, end, path.join(rootDir, url))
       }
     }
   }
