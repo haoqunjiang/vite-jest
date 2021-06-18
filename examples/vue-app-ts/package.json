@@ -1,20 +1,24 @@
 {
-  "name": "vue-app-ts",
   "version": "0.0.0",
-  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "test:unit": "vite-jest --no-cache"
   },
   "dependencies": {
-    "vue": "^3.1.1"
+    "vue": "^3.0.5"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.23",
     "@vitejs/plugin-vue": "^1.2.3",
-    "@vue/compiler-sfc": "^3.1.1",
+    "@vue/compiler-sfc": "^3.0.5",
+    "@vue/test-utils": "^2.0.0-rc.6",
+    "jest": "^27.0.4",
+    "jest-environment-jsdom": "^27.0.3",
     "typescript": "^4.3.2",
     "vite": "^2.3.7",
-    "vue-tsc": "^0.0.8"
+    "vite-jest": "workspace:*",
+    "vue-tsc": "^0.0.24"
   }
 }

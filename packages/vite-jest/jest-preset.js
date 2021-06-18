@@ -1,11 +1,11 @@
 const resolveRelative = url => (new URL(url, import.meta.url)).pathname
 
 export default {
-  moduleFileExtensions: ['js', 'jsx', 'json', 'vue', 'mjs'],
-  extensionsToTreatAsEsm: ['.jsx', '.vue'],
+  moduleFileExtensions: ['js', 'jsx', 'json', 'vue', 'mjs', 'ts', 'tsx'],
+  extensionsToTreatAsEsm: ['.jsx', '.vue', '.ts', '.tsx'],
 
   transform: {
-    "^.+\\.(m)?(js|jsx|json|vue)$": resolveRelative('./index.js'),
+    "^.+\\.(js|mjs|jsx|json|vue|ts|tsx)$": resolveRelative('./index.js'),
   },
   transformIgnorePatterns: [
     '!/node_modules/\\.vite/',
