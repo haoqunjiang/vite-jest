@@ -1,19 +1,18 @@
 {
-  "name": "vue-app",
   "version": "0.0.0",
-  "private": true,
+  "type": "commonjs",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "test:unit": "NODE_OPTIONS=--experimental-vm-modules jest"
+    "test:unit": "vite-jest --no-cache"
   },
   "dependencies": {
-    "vue": "^3.1.1"
+    "vue": "^3.0.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.2.3",
-    "@vue/compiler-sfc": "^3.1.1",
+    "@vue/compiler-sfc": "^3.0.5",
     "@vue/test-utils": "^2.0.0-rc.6",
     "jest": "^27.0.4",
     "jest-environment-jsdom": "^27.0.3",

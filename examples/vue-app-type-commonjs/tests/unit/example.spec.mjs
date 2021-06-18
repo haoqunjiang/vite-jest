@@ -1,8 +1,7 @@
 import { mount } from "@vue/test-utils";
-import App from "@/src/App.vue";
-
+import App from "@/App.vue";
 
 test("hellow world", async () => {
   const wrapper = mount(App);
-  expect(wrapper.html()).toBe("<h1>Hello World</h1>");
+  expect(wrapper.html()).toMatch("Hello Vue 3 + Vite</h1>");
 });
