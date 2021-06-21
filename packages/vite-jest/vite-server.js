@@ -10,6 +10,7 @@ const viteServer = await createServer({
   // hmr: false
 })
 
+console.log(viteServer.config.cacheDir)
 // FIXME: use detected rootDir instead of process.cwd()
 const viteCacheDirectory = path.join(process.cwd(), './node_modules/.vite/')
 if (!fs.existsSync(viteCacheDirectory)) {

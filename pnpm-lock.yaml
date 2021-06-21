@@ -7,7 +7,7 @@ importers:
       '@types/jest': ^26.0.23
       '@vitejs/plugin-vue': ^1.2.3
       '@vue/compiler-sfc': ^3.1.1
-      '@vue/test-utils': ^2.0.0-rc.7
+      '@vue/test-utils': ^2.0.0-rc.8
       jest: ^27.0.4
       jest-environment-jsdom: ^27.0.3
       typescript: ^4.3.4
@@ -21,7 +21,7 @@ importers:
       '@types/jest': 26.0.23
       '@vitejs/plugin-vue': 1.2.3_@vue+compiler-sfc@3.1.1
       '@vue/compiler-sfc': 3.1.1_vue@3.1.1
-      '@vue/test-utils': 2.0.0-rc.7_vue@3.1.1
+      '@vue/test-utils': 2.0.0-rc.8_vue@3.1.1
       jest: 27.0.4
       jest-environment-jsdom: 27.0.3
       typescript: 4.3.4
@@ -33,7 +33,7 @@ importers:
     specifiers:
       '@vitejs/plugin-vue': ^1.2.3
       '@vue/compiler-sfc': ^3.1.1
-      '@vue/test-utils': ^2.0.0-rc.7
+      '@vue/test-utils': ^2.0.0-rc.8
       jest: ^27.0.4
       jest-environment-jsdom: ^27.0.3
       vite: ^2.3.8
@@ -44,7 +44,7 @@ importers:
     devDependencies:
       '@vitejs/plugin-vue': 1.2.3_@vue+compiler-sfc@3.1.1
       '@vue/compiler-sfc': 3.1.1_vue@3.1.1
-      '@vue/test-utils': 2.0.0-rc.7_vue@3.1.1
+      '@vue/test-utils': 2.0.0-rc.8_vue@3.1.1
       jest: 27.0.4
       jest-environment-jsdom: 27.0.3
       vite: 2.3.8
@@ -55,7 +55,7 @@ importers:
       '@vitejs/plugin-vue': ^1.2.3
       '@vitejs/plugin-vue-jsx': ^1.1.5
       '@vue/compiler-sfc': ^3.1.1
-      '@vue/test-utils': ^2.0.0-rc.7
+      '@vue/test-utils': ^2.0.0-rc.8
       jest: ^27.0.4
       jest-environment-jsdom: ^27.0.3
       vite: ^2.3.8
@@ -67,7 +67,7 @@ importers:
       '@vitejs/plugin-vue': 1.2.3_@vue+compiler-sfc@3.1.1
       '@vitejs/plugin-vue-jsx': 1.1.5
       '@vue/compiler-sfc': 3.1.1_vue@3.1.1
-      '@vue/test-utils': 2.0.0-rc.7_vue@3.1.1
+      '@vue/test-utils': 2.0.0-rc.8_vue@3.1.1
       jest: 27.0.4
       jest-environment-jsdom: 27.0.3
       vite: 2.3.8
@@ -922,8 +922,8 @@ packages:
   /@vue/shared/3.1.1:
     resolution: {integrity: sha512-g+4pzAw7PYSjARtLBoDq6DmcblX8i9KJHSCnyM5VDDFFifUaUT9iHbFpOF/KOizQ9f7QAqU2JH3Y6aXjzUMhVA==}
 
-  /@vue/test-utils/2.0.0-rc.7_vue@3.1.1:
-    resolution: {integrity: sha512-CeaahWNVUFW+MXY0dvGP655upNVWcbzqpu6qMn4nK/2nU3O9uDuthRXBIle++nXanYkNUCvlC+TQ5fVeKkvl+Q==}
+  /@vue/test-utils/2.0.0-rc.8_vue@3.1.1:
+    resolution: {integrity: sha512-D06/y5N08QsfwlN7MwjSDI069Vv8L6BLjdHz6wvu+uXtGuTkhbzkmzHWIXHU+lrvi3b6FoQDpYsTiHmdQJbYaw==}
     peerDependencies:
       vue: ^3.0.1
     dependencies:
