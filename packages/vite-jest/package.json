@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "jest": "^27.0.4",
-    "vite": "^2.3.7"
+    "vite": "^2.3.8"
   },
   "dependencies": {
     "es-module-lexer": "^0.6.0",
