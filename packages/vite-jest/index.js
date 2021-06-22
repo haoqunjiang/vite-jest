@@ -53,6 +53,9 @@ async function processAsync(src, filepath) {
       if (url.startsWith(FS_PREFIX)) {
         mStr.overwrite(start, end, fsPathFromId(url))
       } else if (url === '/@vite/env') {
+        // FIXME: Temporary workaround.
+        // The root problem is that Jest can't resolve virtual files.
+        // So it may be better to create on-disk placeholder files for virtual files.
         mStr.overwrite(start, end, require.resolve('vite/dist/client/env.js'))
       } else if (url === '/@vite/client') {
         mStr.overwrite(start, end, require.resolve('vite/dist/client/client.js'))
@@ -62,6 +65,9 @@ async function processAsync(src, filepath) {
     }
   }
 
+  // TODO:
+  // Implement https://github.com/vitejs/vite/blob/main/packages/vite/src/node/plugins/clientInjections.ts
+
   return {
     code: mStr.toString(),
     // TODO: use `@cush/sorcery` to merge source map of the magic string
@@ -69,17 +75,10 @@ async function processAsync(src, filepath) {
   }
 }
 
-function processSync (src, filepath) {
-  // TODO:
-  // Implement https://github.com/vitejs/vite/blob/main/packages/vite/src/node/plugins/clientInjections.ts
-  return src
-}
-
-
 export default {
   processAsync,
 
   // It is necessary because we use vite-jest to tranform everything,
   // we'll inevitably encounter some CommonJS modules.
-  process: processSync
+  process: src => src
 }
