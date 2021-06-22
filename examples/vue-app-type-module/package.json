@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "test:unit": "vite-jest --no-cache"
+    "test:unit": "vite-jest"
   },
   "dependencies": {
     "vue": "^3.1.1"
