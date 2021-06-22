@@ -2,7 +2,13 @@
 
 First-class Vite integration for Jest.
 
-Still work-in-progress, see [`vue-app-type-module`](./examples/vue-app-type-module/) for a working example.
+Still work-in-progress, here are some working examples:
+
+- [Vue 3 + `type: "module"` in `package.json`](./examples/vue-app-type-module/)
+- [Vue 3 + `type: "commonjs"` or no `type` field in `package.json`](./examples/vue-app-type-commonjs/)
+  - Beware that all source and unit test JavaScript files should be named with the `.mjs` extension in this case.
+- [Vue 3 + TypeScript](./examples/vue-app-ts/)
+- [React](./examples/react-app-type-module/)
 
 Usage:
 
