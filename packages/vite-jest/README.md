@@ -41,6 +41,7 @@ Besides from configuring the transformer and reporter:
 
 ## TODOs
 
-* Support `import()`, `import.meta.glob`, etc.
+* Support `import()` edge cases
+* Test `import.meta.glob`, etc.
 * Better source map
 * Clean up the console output
