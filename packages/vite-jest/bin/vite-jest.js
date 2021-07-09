@@ -14,7 +14,7 @@ fs.writeFileSync(path.join(viteClientDirectory, 'package.json'), JSON.stringify(
 execa.sync('node', [
   '--experimental-vm-modules',
   jestPath,
-  process.argv.slice(2)
+  ...process.argv.slice(2)
 ], {
   stdio: 'inherit'
 })
