@@ -11,9 +11,9 @@ const viteServer = await createServer({
     mainFields: []
   },
   server: {
+    hmr: false,
     middlewareMode: true,
-  },
-  hmr: false
+  }
 })
 
 // Workaround to make Node recognize these files as ES modules
