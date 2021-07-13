@@ -36,8 +36,7 @@ Besides from configuring the transformer and reporter:
 
 ## The `vite-jest` Command
 
-* Jest requries the `--experimental-vm-modules` flag of Node.js to be turned on to support ES module transformation.
-* As <https://github.com/nodejs/modules/issues/393> isn't resolved, Jest now uses [a very straightforward way to determine if a `.js` file should be loaded as ES module](https://github.com/facebook/jest/blob/v27.0.4/packages/jest-resolve/src/shouldLoadAsEsm.ts). This logic recognizes files under `node_modules/.vite/` and `node_modules/vite/dist/client/` as CommonJS modules. So we have to put some dummy `package.json` files (with the mere content of `{ "type": "module" }`) under these directories to work around it. This issue can also be fixed in Vite later.
+* Jest requries the `--experimental-vm-modules` flag of Node.js to be turned on to support ES module transformation. The `vite-jest` command turns it on by default.
 
 ## TODOs
 
