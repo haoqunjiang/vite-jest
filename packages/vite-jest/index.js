@@ -26,6 +26,9 @@ export function fsPathFromId(id) {
 
 // TODO: use a createTransformer function to get rootDir
 const rootDir = process.cwd()
+// https://github.com/vitejs/vite/blob/v2.4.2/packages/vite/src/node/constants.ts#L44-L46
+const CLIENT_ENTRY = require.resolve('vite/dist/client/client.mjs')
+const ENV_ENTRY = require.resolve('vite/dist/client/env.mjs')
 
 async function processAsync(src, filepath) {
   const result = await viteServer.transformRequest(filepath)
@@ -56,9 +59,9 @@ async function processAsync(src, filepath) {
         // FIXME: Temporary workaround.
         // The root problem is that Jest can't resolve virtual files.
         // So it may be better to create on-disk placeholder files for virtual files.
-        mStr.overwrite(start, end, require.resolve('vite/dist/client/env.js'))
+        mStr.overwrite(start, end, ENV_ENTRY)
       } else if (url === '/@vite/client') {
-        mStr.overwrite(start, end, require.resolve('vite/dist/client/client.js'))
+        mStr.overwrite(start, end, CLIENT_ENTRY)
       } else if (url.startsWith('/')) {
         mStr.overwrite(start, end, path.join(rootDir, url))
       }
