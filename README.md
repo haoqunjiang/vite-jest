@@ -8,7 +8,8 @@ Still work-in-progress, here are some working examples:
 - [Vue 3 + `type: "commonjs"` or no `type` field in `package.json`](./examples/vue-app-type-commonjs/)
   - Beware that all source and unit test JavaScript files should be named with the `.mjs` extension in this case.
 - [Vue 3 + TypeScript](./examples/vue-app-ts/)
-- [React](./examples/react-app-type-module/)
+- [React + `type: "module"` in `package.json`](./examples/react-app-type-module/)
+- [React + TypeScript](./examples/react-app-ts/)
 
 Usage:
 
