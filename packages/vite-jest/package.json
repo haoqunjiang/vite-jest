@@ -31,6 +31,7 @@
     "es-module-lexer": "^0.6.0",
     "execa": "^5.1.1",
     "jest-transform-stub": "^2.0.0",
-    "magic-string": "^0.25.7"
+    "magic-string": "^0.25.7",
+    "slash": "^4.0.0"
   }
 }
