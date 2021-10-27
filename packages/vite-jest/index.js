@@ -2,6 +2,8 @@ import os from 'os'
 import path from 'path'
 import { createRequire } from 'module';
 
+import slash from 'slash'
+
 import { parse } from 'es-module-lexer/dist/lexer.js'
 import MagicString from 'magic-string'
 
@@ -13,8 +15,10 @@ const isWindows = os.platform() === 'win32'
 const VOLUME_RE = /^[A-Z]:/i
 const FS_PREFIX = `/@fs/`
 
+const slashOnWindows = path => isWindows ? slash(path) : path
+
 export function normalizePath(id) {
-  return path.posix.normalize(isWindows ? slash(id) : id)
+  return path.posix.normalize(slashOnWindows(id))
 }
 
 export function fsPathFromId(id) {
@@ -63,7 +67,7 @@ async function processAsync(src, filepath) {
       } else if (url === '/@vite/client') {
         mStr.overwrite(start, end, CLIENT_ENTRY)
       } else if (url.startsWith('/')) {
-        mStr.overwrite(start, end, path.join(rootDir, url))
+        mStr.overwrite(start, end, slashOnWindows(path.join(rootDir, url)))
       }
     }
   }

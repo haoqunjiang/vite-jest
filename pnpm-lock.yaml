@@ -138,12 +138,14 @@ importers:
       jest: ^27.0.6
       jest-transform-stub: ^2.0.0
       magic-string: ^0.25.7
+      slash: ^4.0.0
       vite: ^2.4.2
     dependencies:
       es-module-lexer: 0.6.0
       execa: 5.1.1
       jest-transform-stub: 2.0.0
       magic-string: 0.25.7
+      slash: 4.0.0
     devDependencies:
       jest: 27.0.6
       vite: 2.4.2
@@ -3149,6 +3151,11 @@ packages:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
     dev: true
+
+  /slash/4.0.0:
+    resolution: {integrity: sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==}
+    engines: {node: '>=12'}
+    dev: false
 
   /source-map-js/0.6.2:
     resolution: {integrity: sha512-/3GptzWzu0+0MBQFrDKzw/DvvMTUORvgY6k6jd/VS6iCR4RDTKWH6v6WPwQoUO8667uQEf9Oe38DxAYWY5F/Ug==}

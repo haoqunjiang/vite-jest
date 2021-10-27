@@ -1,7 +1,10 @@
+import os from 'os'
 import { createRequire } from 'module'
 
 const require = createRequire(import.meta.url)
-const resolveRelative = url => (new URL(url, import.meta.url)).pathname
+
+const isWindows = os.platform() === 'win32'
+const resolveRelative = url => (new URL(url, import.meta.url)).pathname.substr(isWindows ? 1 : 0)
 
 export default {
   moduleFileExtensions: ['js', 'jsx', 'json', 'vue', 'mjs', 'ts', 'tsx'],
