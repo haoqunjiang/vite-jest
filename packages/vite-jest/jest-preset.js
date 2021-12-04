@@ -7,11 +7,11 @@ const isWindows = os.platform() === 'win32'
 const resolveRelative = url => (new URL(url, import.meta.url)).pathname.substr(isWindows ? 1 : 0)
 
 export default {
-  moduleFileExtensions: ['js', 'jsx', 'json', 'vue', 'mjs', 'ts', 'tsx'],
-  extensionsToTreatAsEsm: ['.jsx', '.vue', '.ts', '.tsx'],
+  moduleFileExtensions: ['js', 'json', 'jsx', 'mjs', 'svelte', 'ts', 'tsx', 'vue'],
+  extensionsToTreatAsEsm: ['.jsx', '.svelte', '.ts', '.tsx', '.vue'],
 
   transform: {
-    "^.+\\.(js|mjs|jsx|json|vue|ts|tsx)$": resolveRelative('./index.js'),
+    "^.+\\.(js|json|jsx|mjs|svelte|ts|tsx|vue)$": resolveRelative('./index.js'),
   },
   transformIgnorePatterns: [
     '!/node_modules/\\.vite/',
