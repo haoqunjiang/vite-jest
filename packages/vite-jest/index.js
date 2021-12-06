@@ -58,7 +58,7 @@ async function processAsync(src, filepath) {
       mStr.overwrite(
         start,
         end,
-        `./${path.relative(path.dirname(filepath), fsPathFromId(url))}`
+        `./${path.posix.relative(path.dirname(filepath), fsPathFromId(url))}`
       )
       continue
     }
@@ -74,14 +74,14 @@ async function processAsync(src, filepath) {
       mStr.overwrite(
         start,
         end,
-        `./${path.relative(path.dirname(filepath), virtualFilePath)}`
+        `./${path.posix.relative(path.dirname(filepath), virtualFilePath)}`
       )
       continue
     }
     
     if (url.startsWith('/')) {
       const projectFilePath = slashOnWindows(path.join(viteServer.config.root, url))
-      const relativePath = `./${path.relative(path.dirname(filepath), projectFilePath)}`
+      const relativePath = `./${path.posix.relative(path.dirname(filepath), projectFilePath)}`
 
       mStr.overwrite(
         start,
