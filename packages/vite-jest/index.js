@@ -34,6 +34,12 @@ const rootDir = process.cwd()
 const CLIENT_ENTRY = require.resolve('vite/dist/client/client.mjs')
 const ENV_ENTRY = require.resolve('vite/dist/client/env.mjs')
 
+function isVirtualFileRequest(requestUrl) {
+  if (requestUrl === '/@vite/client' || requestUrl === '/@vite/env') {
+    return true
+  }
+}
+
 async function processAsync(src, filepath) {
   const result = await viteServer.transformRequest(filepath)
 
