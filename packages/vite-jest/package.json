@@ -10,7 +10,7 @@
   },
   "bin": "bin/vite-jest.js",
   "scripts": {
-    "test": "pnpm --filter ../../examples -r exec -- pnpm run test:unit"
+    "test": "pnpm --filter ../../examples --filter ../../playground -r exec -- pnpm run test:unit"
   },
   "repository": {
     "type": "git",
