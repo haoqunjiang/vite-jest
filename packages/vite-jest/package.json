@@ -1,6 +1,6 @@
 {
   "name": "vite-jest",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A Jest transformer that enables first-class Vite integration",
   "type": "module",
   "exports": {
