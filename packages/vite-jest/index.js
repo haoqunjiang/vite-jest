@@ -1,47 +1,28 @@
-import os from 'os'
+import fs from 'fs'
 import path from 'path'
-import { createRequire } from 'module';
-
-import slash from 'slash'
 
 import { parse } from 'es-module-lexer/dist/lexer.js'
 import MagicString from 'magic-string'
 
 import viteServer from './vite-server.js'
+import {
+  slashOnWindows,
 
-const require = createRequire(import.meta.url)
-
-const isWindows = os.platform() === 'win32'
-const VOLUME_RE = /^[A-Z]:/i
-const FS_PREFIX = `/@fs/`
-
-const slashOnWindows = path => isWindows ? slash(path) : path
-
-export function normalizePath(id) {
-  return path.posix.normalize(slashOnWindows(id))
-}
-
-export function fsPathFromId(id) {
-  const fsPath = normalizePath(id.slice(FS_PREFIX.length))
-  return fsPath.startsWith('/') || fsPath.match(VOLUME_RE)
-    ? fsPath
-    : `/${fsPath}`
-}
-
-// TODO: use a createTransformer function to get rootDir
-const rootDir = process.cwd()
-// https://github.com/vitejs/vite/blob/v2.4.2/packages/vite/src/node/constants.ts#L44-L46
-const CLIENT_ENTRY = require.resolve('vite/dist/client/client.mjs')
-const ENV_ENTRY = require.resolve('vite/dist/client/env.mjs')
-
-function isVirtualFileRequest(requestUrl) {
-  if (requestUrl === '/@vite/client' || requestUrl === '/@vite/env') {
-    return true
-  }
-}
+  FS_PREFIX,
+  fsPathFromId,
+  
+  isVirtualFileRequest,
+  virtualPathToFsPath
+} from './pathUtils.js'
 
 async function processAsync(src, filepath) {
-  const result = await viteServer.transformRequest(filepath)
+  let result = await viteServer.transformRequest(filepath)
+
+  // not sure if this is reliable
+  if (viteServer._pendingReload) {
+    await viteServer._pendingReload
+    result = await viteServer.transformRequest(filepath)
+  }
 
   if (!result) {
     throw new Error(`Failed to load module ${filepath}`)
@@ -62,25 +43,42 @@ async function processAsync(src, filepath) {
     if (dynamicIndex > -1) {
       // TODO
       console.log('dynamic import not supported yet')
-    } else if (url) {
-      if (url.startsWith(FS_PREFIX)) {
-        mStr.overwrite(start, end, fsPathFromId(url))
-      } else if (url === '/@vite/env') {
-        // FIXME: Temporary workaround.
-        // The root problem is that Jest can't resolve virtual files.
-        // So it may be better to create on-disk placeholder files for virtual files.
-        mStr.overwrite(start, end, ENV_ENTRY)
-      } else if (url === '/@vite/client') {
-        mStr.overwrite(start, end, CLIENT_ENTRY)
-      } else if (url.startsWith('/')) {
-        mStr.overwrite(start, end, slashOnWindows(path.join(rootDir, url)))
+      continue
+    }
+
+    if (!url) {
+      // will this really happen?
+      continue
+    }
+    
+    if (url.startsWith(FS_PREFIX)) {
+      mStr.overwrite(start, end, fsPathFromId(url))
+      continue
+    }
+    
+    if (isVirtualFileRequest(url)) {
+      const virtualFilePath = virtualPathToFsPath(url)
+
+      if (!fs.existsSync(virtualFilePath)) {
+        const { code } = await viteServer.transformRequest(url.replace(/^\/@id\//, ''))
+        fs.writeFileSync(virtualFilePath, code)
       }
+
+      mStr.overwrite(start, end, virtualFilePath)
+      continue
+    }
+    
+    if (url.startsWith('/')) {
+      const projectFilePath = slashOnWindows(path.join(viteServer.config.root, url))
+      mStr.overwrite(
+        start,
+        end,
+        projectFilePath
+      )
+      continue
     }
   }
-
-  // TODO:
-  // Implement https://github.com/vitejs/vite/blob/main/packages/vite/src/node/plugins/clientInjections.ts
-
+  
   return {
     code: mStr.toString(),
     // TODO: use `@cush/sorcery` to merge source map of the magic string

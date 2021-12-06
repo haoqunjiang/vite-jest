@@ -7,7 +7,7 @@
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview --port 5050",
     "typecheck": "vue-tsc --noEmit",
-    "test:unit": "vite-jest"
+    "test:unit": "vite-jest --no-cache"
   },
   "dependencies": {
     "vue": "^3.2.22"

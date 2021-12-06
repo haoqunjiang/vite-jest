@@ -18,7 +18,9 @@ Therefore, module paths can't be resolved via the Vite server, making a few Vite
 
 So we have to workaround this issue in the transformer, with the help of [`es-module-lexer`](https://www.npmjs.com/package/es-module-lexer)
 
-Note that virtual files injected by Vite / Rollup plugins are not supported at the moment. You need to disable these plugins during testing (when `process.env.NODE_ENV === 'test'`).
+Virtual files injected by Vite / Rollup plugins are writtern to the `./node_modules/.vite-jest-cache` directory.
+
+Note that React fast refresh is not supported at the moment. You need to disable this feature during testing (when `process.env.NODE_ENV === 'test'`).
 
 ## The Reporter
 
