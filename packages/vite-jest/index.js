@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-import { parse } from 'es-module-lexer/dist/lexer.js'
+import { parse } from 'es-module-lexer'
 import MagicString from 'magic-string'
 
 import viteServer from './vite-server.js'
@@ -32,7 +32,7 @@ async function processAsync(src, filepath) {
   const mStr = new MagicString(result.code)
   const [imports] = await parse(result.code)
   for (let index = 0; index < imports.length; index++) {
-    const {
+    let {
       s: start,
       e: end,
       ss: expStart,
@@ -40,17 +40,20 @@ async function processAsync(src, filepath) {
       n: url
     } = imports[index]
 
-    if (dynamicIndex > -1) {
-      // TODO
-      console.log('dynamic import not supported yet')
-      continue
-    }
-
     if (!url) {
       // will this really happen?
       continue
     }
     
+    // when parsing dynamic imports, the starting and ending quotes are also included
+    // note here we don't care about the case where the url is a variable
+    // because Vite doesn't allow fully-dynamic imports.
+    // They must be a string.
+    if (dynamicIndex > -1) {
+      start += 1
+      end -= 1
+    }
+
     if (url.startsWith(FS_PREFIX)) {
       mStr.overwrite(start, end, fsPathFromId(url))
       continue
@@ -78,7 +81,7 @@ async function processAsync(src, filepath) {
       continue
     }
   }
-  
+
   return {
     code: mStr.toString(),
     // TODO: use `@cush/sorcery` to merge source map of the magic string
