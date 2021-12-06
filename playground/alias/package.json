@@ -6,9 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "test:unit": "vite-jest --no-cache"
   },
   "devDependencies": {
-    "vite": "^2.6.4"
+    "jest": "27.4.3",
+    "jest-environment-jsdom": "^27.4.3",
+    "vite": "^2.6.14",
+    "vite-jest": "workspace:*"
   }
 }
