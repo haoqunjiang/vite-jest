@@ -7,7 +7,53 @@ Usage:
 1. Add `preset: 'vite-jest'` to your Jest config.
 2. Replace the `jest` CLI with `vite-jest`.
 
-## The Transformer
+## Limitations and Differences with CommonJS tests
+
+Most are already documented in the official Jest documentation:
+<https://jestjs.io/docs/ecmascript-modules#differences-between-esm-and-commonjs>
+
+### The `jest` Object
+
+It's not automatically injected into each module. To access it, you must import it from `@jest/globals`: `import { jest } from '@jest/globals'`
+
+### Mocking ES Modules
+
+Jest currently doesn't support jest.mock in a clean way in ESM.
+
+There's now an experimental API (`jest.unstable_mockModule`) for this, but you must use it in combination with top-level await and dynamic imports:
+
+```js
+// Note that jest must be explicitly imported
+import { jest } from '@jest/globals';
+
+const mockPlaySoundFile = jest.fn();
+jest.unstable_mockModule('./sound-player', () => {
+    return {default: jest.fn().mockImplementation(() => {
+        return { playSoundFile: mockPlaySoundFile };
+    })};
+});
+
+// Note that the mocked module must be dynamically imported
+const {default: SoundPlayer} = await import('./sound-player');
+const {default: SoundPlayerConsumer} = await import('./sound-player-consumer');
+
+beforeEach(() => {
+  SoundPlayer.mockClear();
+  mockPlaySoundFile.mockClear();
+});
+```
+
+Follow [this issue](https://github.com/facebook/jest/issues/10025) for updates.
+
+### Doesn't Support Windows (yet)
+
+We are actively working on that. It may be supported in a patch release.
+
+---
+
+## `vite-jest` Internals
+
+### The Transformer
 
 The transformer pass custom file formats such as `.vue`, `.jsx` to vite for transformation.
 
@@ -22,11 +68,11 @@ Virtual files injected by Vite / Rollup plugins are writtern to the `./node_modu
 
 Note that React fast refresh is not supported at the moment. You need to disable this feature during testing (when `process.env.NODE_ENV === 'test'`).
 
-## The Reporter
+### The Reporter
 
 Only a Jest reporter can get the signal that all tests are done, so a custom reporter (`'vite-jest/reporter.cjs'`) is also required to correctly shutdown the Vite server after testing.
 
-## The Preset
+### The Preset
 
 It helps simplify the configuration process by including most essential options.
 
@@ -36,13 +82,12 @@ Besides from configuring the transformer and reporter:
 * The Vite cache directory (`node_modules/.vite`) must also be processed by the transformer.
 * Assets and style files are stubbed.
 
-## The `vite-jest` Command
+### The `vite-jest` Command
 
 * Jest requries the `--experimental-vm-modules` flag of Node.js to be turned on to support ES module transformation. The `vite-jest` command turns it on by default.
+* All tests must be run serially, because both Vite and `vite-jest` use caches heavily, paralleriazation may cause race conditions. So `vite-jest` automatically passes a `--runInBand` to the underlying `jest` command.
 
 ## TODOs
 
-* Support `import()` edge cases
-* Test `import.meta.glob`, etc.
 * Better source map
 * Clean up the console output
