@@ -15,7 +15,23 @@ const viteServer = await createServer({
       '@vue/compiler-core': '@vue/compiler-core/dist/compiler-core.cjs.js',
       '@vue/test-utils': '@vue/test-utils/dist/vue-test-utils.cjs.js',
     }
-  }
+  },
+
+  // `@jest/globals` must be kept-as-is
+  // https://github.com/facebook/jest/blob/3093c18c428d962eb959437b322c6a5b0ae0e7a2/packages/jest-runtime/src/index.ts#L544-L554
+  optimizeDeps: {
+    exclude: ['@jest/globals']
+  },
+  plugins: [
+    {
+      resolveId(id) {
+        if (id === '@jest/globals') {
+          return id
+        }
+      },
+      enforce: 'pre'
+    }
+  ]
 })
 
 // A cache directory for virtual modules

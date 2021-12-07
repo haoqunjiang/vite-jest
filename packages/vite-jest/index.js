@@ -54,6 +54,14 @@ async function processAsync(src, filepath) {
       end -= 1
     }
 
+    // even though we use a plugin to avoid resolving this module to its actual entry
+    // vite still adds a `/@id/` prefix
+    // so we must use `endsWith` instead of `===`
+    if (url.endsWith('@jest/globals')) {
+      mStr.overwrite(start, end, '@jest/globals')
+      continue
+    }
+
     if (url.startsWith(FS_PREFIX)) {
       mStr.overwrite(
         start,
