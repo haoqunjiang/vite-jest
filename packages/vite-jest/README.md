@@ -49,6 +49,10 @@ Follow [this issue](https://github.com/facebook/jest/issues/10025) for updates.
 
 We are actively working on that. It may be supported in a patch release.
 
+### Coverage Report May be broken
+
+We are not very sure how to fix this. Any help is appreciated.
+
 ---
 
 ## `vite-jest` Internals
