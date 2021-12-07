@@ -14,7 +14,7 @@ if (!additionalArgs.includes('--runInBand') && !additionalArgs.includes('-i')) {
 execa.sync('node', [
   '--experimental-vm-modules',
   jestPath,
-  additionalArgs
+  ...additionalArgs
 ], {
   stdio: 'inherit'
 })
