@@ -86,6 +86,7 @@ Besides from configuring the transformer and reporter:
 
 * Jest requries the `--experimental-vm-modules` flag of Node.js to be turned on to support ES module transformation. The `vite-jest` command turns it on by default.
 * All tests must be run serially, because both Vite and `vite-jest` use caches heavily, paralleriazation may cause race conditions. So `vite-jest` automatically passes a `--runInBand` to the underlying `jest` command.
+* A `--no-cache` argument is also passed to fix some edge cases. Since Vite transformation is ususally very fast, the performance penalty of not caching is negligible.
 
 ## TODOs
 

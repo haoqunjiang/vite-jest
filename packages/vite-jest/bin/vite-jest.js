@@ -11,6 +11,10 @@ if (!additionalArgs.includes('--runInBand') && !additionalArgs.includes('-i')) {
   additionalArgs.push('--runInBand')
 }
 
+if(!additionalArgs.includes('--no-cache')) {
+  additionalArgs.push('--no-cache')
+}
+
 execa.sync('node', [
   '--experimental-vm-modules',
   jestPath,
