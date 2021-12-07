@@ -16,12 +16,16 @@ import {
 } from './pathUtils.js'
 
 async function processAsync(src, filepath) {
-  let result = await viteServer.transformRequest(filepath)
+  // We need the timestamp because in the case `jest --watch`
+  // the same vite server instance will be used.
+  // So we need to make sure we don't use the previous cached result.
+  const filepathForTransform = `${filepath}?${Date.now()}`
+  let result = await viteServer.transformRequest(filepathForTransform)
 
   // not sure if this is reliable
   while (viteServer._pendingReload) {
     await viteServer._pendingReload
-    result = await viteServer.transformRequest(filepath)
+    result = await viteServer.transformRequest(filepathForTransform)
   }
 
   if (!result) {
