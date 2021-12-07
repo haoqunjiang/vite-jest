@@ -19,7 +19,7 @@ async function processAsync(src, filepath) {
   let result = await viteServer.transformRequest(filepath)
 
   // not sure if this is reliable
-  if (viteServer._pendingReload) {
+  while (viteServer._pendingReload) {
     await viteServer._pendingReload
     result = await viteServer.transformRequest(filepath)
   }
